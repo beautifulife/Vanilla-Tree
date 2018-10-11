@@ -22,10 +22,7 @@ $ yarn dev (or npm run dev)
 2. 각 폴더에는 파일을 생성할 수 있는 버튼이 있어야 합니다.
 3. 파일을 더블 클릭할 경우, 폴더로 변경됩니다.
 4. 파일이나 폴더를 생성할 경우, `/app/data.js`에서 가져온 객체(`TREE_DATA`)에도 정보를 수정/추가해야 합니다.
-5. 아래 동영상을 참고하세요.
-
-
-
+5. 리포지토리에 첨부된 `TreeView.mp4` 동영상을 참고하세요.
 
 ## [webpack](https://webpack.js.org/)
 If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
