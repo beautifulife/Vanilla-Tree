@@ -1,5 +1,7 @@
 # Tree View
 
+폴더/파일 구조를 웹으로 표현해내는 과제입니다. 상세 내용은 아래 TODO 부분을 참고해주세요.
+
 ## Setup
 
 Install dependencies
