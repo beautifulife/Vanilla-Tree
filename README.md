@@ -31,6 +31,19 @@ $ yarn dev (or npm run dev)
 
 ![Tree View](/tree-view.gif)
 
+## 과제 진행 및 제출 방법
+
+해당 명령어에 대해서는 각자 찾아보시고 잘 모르시면 물어보세요.
+
+1. 과제 Repository `git clone`
+2. 작업 브랜치 생성 `git branch` or `git checkout -b`
+3. < 과제 작업 >
+4. 수정 사항 `git add`
+5. 수정 사항 `git commit`
+6. 본인 Repository에 작업한 브랜치 `git push`
+7. 작업한 브랜치 -> `master` 브랜치로 Pull Request 열기
+8. 끝
+
 ## [webpack](https://webpack.js.org/)
 If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
 When changes are made the bundle will be recompiled. This modified bundle is served from memory at the relative path specified in publicPath.
