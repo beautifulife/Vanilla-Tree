@@ -12,6 +12,24 @@ import TREE_DATA from './data';
 // 수정코드
 // =============================== 
 
+// 화면 로드
+var body = document.getElementsByTagName('body')[0]
+body.style.backgroundColor = 'black';
+var reload = document.getElementsByClassName('h1')[0]
+var madeBy = document.getElementsByClassName('madeBy')
+reload.addEventListener('click', function() {
+  location.reload();
+})
+reload.textContent = 'Tree Tree';
+madeBy.textContent = 'Made By Beautifulife';
+
+var div = document.createElement('div');
+var img = document.createElement('img');
+img.src = 'assets/images/oegong.png'
+div.appendChild(img);
+body.appendChild(div);
+
+// tree 만들기 시작
 var content = document.getElementsByClassName('content')[0];
 
 var ul1 = document.createElement('ul');
