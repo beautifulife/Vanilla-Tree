@@ -1,25 +1,25 @@
 export default {
   name: 'Vanilla Tree',
   children: [
-    { name: 'hello' },
-    { name: 'wat' },
+    { name: 'hello1' },
+    { name: 'wat1' },
     {
-      name: 'child folder',
+      name: 'child folder1',
       children: [
         {
-          name: 'child folder',
+          name: 'child folder2',
           children: [
-            { name: 'hello' },
-            { name: 'wat' }
+            { name: 'hello3' },
+            { name: 'wat3' }
           ]
         },
-        { name: 'hello' },
-        { name: 'wat' },
+        { name: 'hello2' },
+        { name: 'wat2' },
         {
-          name: 'child folder',
+          name: 'child folder2',
           children: [
-            { name: 'hello' },
-            { name: 'wat' }
+            { name: 'hello3' },
+            { name: 'wat3' }
           ]
         }
       ]
