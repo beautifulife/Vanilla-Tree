@@ -18,18 +18,37 @@ h1 {
     cursor: pointer;
 }
 
+h1::before {
+    content : '';
+    background-image: url('/assets/images/tree.png');
+    background-size: 100% 100%;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    margin-right: 10px;
+    position:relative;
+    top:5px;
+}
+
 ul {
     margin-top: 10px;
     width: 200px;
+    list-style: none;
 }
 
 li {
-    margin: 5px 0px;
     width: 200px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
     font-weight: 300;
+    line-height: 1.5rem;
     color: white;
+}
+
+li::before {
+    content: '|';
+    margin-right: 10px;
+    font-size: 1.5rem;
 }
 
 .madeBy {
