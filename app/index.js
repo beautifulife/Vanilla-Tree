@@ -16,7 +16,7 @@ import TREE_DATA from './data';
 var body = document.getElementsByTagName('body')[0]
 body.style.backgroundColor = 'black';
 var reload = document.getElementsByClassName('h1')[0]
-var madeBy = document.getElementsByClassName('madeBy')
+var madeBy = document.getElementsByClassName('madeBy')[0]
 reload.addEventListener('click', function() {
   location.reload();
 })
@@ -95,7 +95,7 @@ function changeToFolder(saveData) {
   // var list = document.createElement('li');
   // list.textContent = 'new stuff'
   target.classList.add('folder');
-  var data = {children:[{name:'new stuff'}]};
+  // var data = {children:[{name:'new stuff'}]};
   zaeGui(saveData,target, true)
   // target.removeEventListener('dblclick', changeToFolder);
   console.log(TREE_DATA);
