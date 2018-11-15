@@ -8,28 +8,26 @@ import TREE_DATA from './data';
 // START YOUR APP HERE
 // ================================
 
-// =============================== 
-// 수정코드
-// =============================== 
-
 // 화면 로드
-var body = document.getElementsByTagName('body')[0]
+var body = document.getElementsByTagName('body')[0];
 body.style.backgroundColor = 'black';
-var reload = document.getElementsByClassName('h1')[0]
-var madeBy = document.getElementsByClassName('madeBy')[0]
+var reload = document.getElementsByClassName('h1')[0];
+var madeBy = document.getElementsByClassName('madeBy')[0];
+
 reload.addEventListener('click', function() {
   location.reload();
 })
+
 reload.textContent = 'Tree Tree';
 madeBy.textContent = 'Made By Beautifulife';
 
 var div = document.createElement('div');
 var img = document.createElement('img');
-img.src = 'assets/images/oegong.png'
+img.src = 'assets/images/bottom_img.png';
 div.appendChild(img);
 body.appendChild(div);
 
-// tree 만들기 시작
+// tree 생성 시작
 var content = document.getElementsByClassName('content')[0];
 
 var ul1 = document.createElement('ul');
@@ -39,71 +37,69 @@ ul1.appendChild(list);
 content.appendChild(ul1);
 
 /* ============ 실행 ============ */
-zaeGui(TREE_DATA, list)
+makeTree(TREE_DATA, list);
 /* ============ 실행 ============ */
 
-function zaeGui(data, list, open) {
-  if(data.children) {
+function makeTree(data, list, open) {
+  if (data.children) {
     list.classList.add('folder');
-    list.appendChild(hide(open));
+    list.appendChild(addHideButton(open));
     var ul = document.createElement('ul');
     open || ul.classList.add('hidden');
     list.appendChild(ul);
-    for(let i=0; i<data.children.length; i++) {
+
+    for (let i=0; i<data.children.length; i++) {
       var list = document.createElement('li');
       list.textContent = data.children[i].name;
-      if(!data.children[i].children){
-        changeToFolder.bind(null, data);
-        list.addEventListener('dblclick', changeToFolder.bind(null, data.children[i]));
-        // list.addEventListener('dblclick', changeToFolder);
+
+      if (!data.children[i].children) {
+        list.addEventListener('dblclick', changeToFolder.bind(this, data.children[i]), {once : true});
       }
+
       ul.appendChild(list);
-      zaeGui(data.children[i], list);
+      makeTree(data.children[i], list);
     }
-    ul.appendChild(add(data));
+
+    ul.appendChild(addFile(data));
   }
-  // console.log(TREE_DATA);
 }
 
-function hide(open) {
+function addHideButton(open) {
   var div = document.createElement('div');
-  if(open) {
+
+  if (open) {
     div.textContent = '[-]';
   } else {
     div.textContent = '[+]';
   }
+
   div.classList.add('hide');
-  div.addEventListener('click', toggle);
+  div.addEventListener('click', toggleHideButton);
+  
   return div;
 }
 
-function add(data) {
+function addFile(data) {
   var list = document.createElement('li');
   list.textContent = '+';
   list.classList.add('add');
-  list.addEventListener('click', addData.bind(null, data));
+  list.addEventListener('click', addData.bind(this, data));
+
   return list;
 }
 
-function changeToFolder(saveData) {
-  event.stopPropagation();
-  console.log(saveData);
-  saveData['children'] = [{name:'new stuff'}]; 
-  var target = event.currentTarget;
-  // var ul = document.createElement('ul');
-  // target.appendChild(ul);
-  // var list = document.createElement('li');
-  // list.textContent = 'new stuff'
+function changeToFolder(saveData, ev) {
+  ev.stopPropagation();
+  var target = ev.currentTarget;
+  saveData.children = [{name:'new stuff'}]; 
   target.classList.add('folder');
-  // var data = {children:[{name:'new stuff'}]};
-  zaeGui(saveData,target, true)
-  // target.removeEventListener('dblclick', changeToFolder);
-  console.log(TREE_DATA);
+  makeTree(saveData,target, true);
 }
 
-function toggle() {
-  var target = event.currentTarget;
-  if(target.textContent === '[+]') {
+function toggleHideButton(ev) {
+  var target = ev.currentTarget;
+
+  if (target.textContent === '[+]') {
     target.nextSibling.classList.remove('hidden');
     target.textContent = '[-]';
   } else {
@@ -112,22 +108,22 @@ function toggle() {
   }
 }
 
-function addData(saveData) {
-  console.log(saveData);
-  saveData.children.push({name: 'new stuff'});
-  var target = event.currentTarget;
+function addData(saveData, ev) {
+  var target = ev.currentTarget;
   var list = document.createElement('li');
+  saveData.children.push({name: 'new stuff'});
   list.textContent = 'new stuff';
-  list.addEventListener('dblclick', changeToFolder.bind(null, saveData.children[saveData.children.length-1]));
+  list.addEventListener('dblclick', changeToFolder.bind(null, saveData.children[saveData.children.length-1]), {once : true});
   target.parentNode.insertBefore(list, target);
-  console.log(TREE_DATA);
 }
 
-
+/* DO NOT REMOVE */
+module.hot.accept();
+/* DO NOT REMOVE */
 
 
 // =============================== 
-// 기존코드 
+// Test
 // =============================== 
 
 // if(TREE_DATA.children){
@@ -267,6 +263,3 @@ function addData(saveData) {
 // }
 
 
-/* DO NOT REMOVE */
-module.hot.accept();
-/* DO NOT REMOVE */
