@@ -8,52 +8,47 @@ import TREE_DATA from './data';
 // START YOUR APP HERE
 // ================================
 
-// 화면 로드
-var body = document.getElementsByTagName('body')[0];
+let body = document.getElementsByTagName('body')[0];
+let h1 = document.getElementsByClassName('h1')[0];
+let madeBy = document.getElementsByClassName('madeBy')[0];
+let div = document.createElement('div');
+let img = document.createElement('img');
+let content = document.getElementsByClassName('content')[0];
+let ul = document.createElement('ul');
+let list = document.createElement('li');
+
 body.style.backgroundColor = 'black';
-var reload = document.getElementsByClassName('h1')[0];
-var madeBy = document.getElementsByClassName('madeBy')[0];
+h1.addEventListener('click', function() {
+  window.location.reload();
+});
 
-reload.addEventListener('click', function() {
-  location.reload();
-})
-
-reload.textContent = 'Tree Tree';
+h1.textContent = 'Tree Tree';
 madeBy.textContent = 'Made By Beautifulife';
-
-var div = document.createElement('div');
-var img = document.createElement('img');
 img.src = 'assets/images/bottom_img.png';
 div.appendChild(img);
 body.appendChild(div);
-
-// tree 생성 시작
-var content = document.getElementsByClassName('content')[0];
-
-var ul1 = document.createElement('ul');
-var list = document.createElement('li');
 list.textContent = TREE_DATA.name;
-ul1.appendChild(list);
-content.appendChild(ul1);
+ul.appendChild(list);
+content.appendChild(ul);
 
-/* ============ 실행 ============ */
 makeTree(TREE_DATA, list);
-/* ============ 실행 ============ */
 
 function makeTree(data, list, open) {
   if (data.children) {
+    let ul = document.createElement('ul');
+
     list.classList.add('folder');
     list.appendChild(addHideButton(open));
-    var ul = document.createElement('ul');
     open || ul.classList.add('hidden');
     list.appendChild(ul);
 
-    for (let i=0; i<data.children.length; i++) {
-      var list = document.createElement('li');
+    for (let i = 0; i < data.children.length; i++) {
+      let list = document.createElement('li');
+
       list.textContent = data.children[i].name;
 
       if (!data.children[i].children) {
-        list.addEventListener('dblclick', changeToFolder.bind(this, data.children[i]), {once : true});
+        list.addEventListener('dblclick', changeToFolder.bind(this, data.children[i]), {once: true});
       }
 
       ul.appendChild(list);
@@ -75,12 +70,13 @@ function addHideButton(open) {
 
   div.classList.add('hide');
   div.addEventListener('click', toggleHideButton);
-  
+
   return div;
 }
 
 function addFile(data) {
-  var list = document.createElement('li');
+  let list = document.createElement('li');
+
   list.textContent = '+';
   list.classList.add('add');
   list.addEventListener('click', addData.bind(this, data));
@@ -89,15 +85,16 @@ function addFile(data) {
 }
 
 function changeToFolder(saveData, ev) {
+  let target = ev.currentTarget;
+
   ev.stopPropagation();
-  var target = ev.currentTarget;
-  saveData.children = [{name:'new stuff'}]; 
+  saveData.children = [{name: 'new stuff'}];
   target.classList.add('folder');
   makeTree(saveData,target, true);
 }
 
 function toggleHideButton(ev) {
-  var target = ev.currentTarget;
+  let target = ev.currentTarget;
 
   if (target.textContent === '[+]') {
     target.nextSibling.classList.remove('hidden');
@@ -109,157 +106,15 @@ function toggleHideButton(ev) {
 }
 
 function addData(saveData, ev) {
-  var target = ev.currentTarget;
-  var list = document.createElement('li');
+  let target = ev.currentTarget;
+  let list = document.createElement('li');
+
   saveData.children.push({name: 'new stuff'});
   list.textContent = 'new stuff';
-  list.addEventListener('dblclick', changeToFolder.bind(null, saveData.children[saveData.children.length-1]), {once : true});
+  list.addEventListener('dblclick', changeToFolder.bind(null, saveData.children[saveData.children.length - 1]), {once: true});
   target.parentNode.insertBefore(list, target);
 }
 
 /* DO NOT REMOVE */
 module.hot.accept();
 /* DO NOT REMOVE */
-
-
-// =============================== 
-// Test
-// =============================== 
-
-// if(TREE_DATA.children){
-//   var ul2 = document.createElement('ul');
-//   list.appendChild(ul2);
-//   for (let i = 0; i<TREE_DATA.children.length; i++) {
-//     var list = document.createElement('li');
-//     list.textContent = TREE_DATA.children[i].name
-//     ul2.appendChild(list);
-    
-//     if (TREE_DATA.children[i].children) {
-//       var ul3 = document.createElement('ul');
-//       list.appendChild(ul3);
-//       for (let j=0; j<TREE_DATA.children[i].children.length; j++) {
-//         var list = document.createElement('li');
-//         list.textContent = TREE_DATA.children[i].children[j].name;
-//         ul3.appendChild(list);
-
-//         if(TREE_DATA.children[i].children[j].children){
-//           var ul4 = document.createElement('ul');
-//           list.appendChild(ul4);
-//           for (let k=0; k<TREE_DATA.children[i].children[j].children.length; k++) {
-//             var list = document.createElement('li');
-//             list.textContent = TREE_DATA.children[i].children[j].children[k].name;
-//             ul4.appendChild(list);
-//           }
-//           var list = document.createElement('li');
-//           list.textContent = '+';
-//           ul4.appendChild(list);
-//         }
-//       }
-//       var list = document.createElement('li');
-//       list.textContent = '+';
-//       ul3.appendChild(list);
-//     }
-//   }
-//   var list = document.createElement('li');
-//   list.textContent = '+';
-//   ul2.appendChild(list);
-// }
-
-// addElement('content', TREE_DATA.name)
-// addElement('Vanilla Tree', TREE_DATA.children[0].name)
-// addElement('Vanilla Tree', TREE_DATA.children[1].name)
-
-
-// addElement(TREE_DATA);
-
-// function addElement(data, parent) {
-//   var className= document.getElementsByClassName('content')[0];
-
-//   //data1 = Array[3], parent1 = VanillaTree
-//   if(parent) {
-//     console.log(parent);
-//     parent = parent.split(' ').join('');
-//     var className = document.getElementsByClassName(parent);
-//     className = className[className.length-1];
-//   }
-
-//   var folder = false;
-//   var idName = className;
-//   console.log(idName);
-  
-//   // 배열일 경우에 ul로 묶음
-//   if(Array.isArray(data)) {
-//     var ul = document.createElement('ul');
-//     idName.appendChild(ul);
-//     for(let i=0; i<data.length; i++) {
-//       folder = !!data[i].children;
-//       ul.appendChild(makeList(data[i], folder));
-//       // if(data[i].children){addElement(idName,data[i].children)}
-//       if(data[i].children) {
-//         addElement(data[i].children, data[i].name);
-//       }
-//     }
-//     ul.appendChild(addPlus());
-//     console.log(idName);
-//     // ul.classList.add(className);
-//     // debugger;
-//   } else {
-//     folder = !!data.children;
-//     idName.appendChild(makeList(data, folder));
-//     if(data.children) {
-//       console.log(data.name);
-//       addElement(data.children, data.name); 
-//     }
-//   }
-
-//   function makeList(data, folder) {
-//     var li = document.createElement('li');
-//     var className = data? data.name.split(' ').join('') : null; 
-//     li.classList.add(className); 
-//     li.textContent = data? data.name : 'new stuff';
-//     if(folder){
-//       li.appendChild(buttonTemplate(data));
-//       // li.className = 'folder';
-//     }
-//     return li;
-//   }
-
-//   function addPlus() {
-//     var li = document.createElement('li');
-//     li.textContent = '+';
-//     li.className = 'add_data';
-//     li.addEventListener('click', function(e) {
-//       e.currentTarget.textContent = 'new stuff';
-//       var idName = e.currentTarget.parentNode;
-//       idName.appendChild(addPlus(idName.parentNode));
-//     })
-//     return li;
-//   }
-// }
-
-// function buttonTemplate(data) {
-//   var div = document.createElement('div');
-//   div.setAttribute('class', 'plus');
-//   div.textContent = '[+]';
-//   div.addEventListener('click', firstPlus);
-//   function firstPlus(e) {
-//     toggle(e.currentTarget, data);
-//   }
-//   return div;
-// }
-
-// function toggle(eventValue) {
-//   var ul = eventValue.nextSibling;
-//   if(eventValue.textContent ==='[+]') {
-//     console.log(eventValue);
-//     eventValue.textContent = '[-]';
-//     ul.classList.remove('hidden');
-//     eventValue.addEventListener('click', toggle);
-//   } else {
-//     eventValue.innerHTML = '[+]';
-//     ul.classList.add('hidden');
-//     console.log('done');
-//   }
-// }
-
-
